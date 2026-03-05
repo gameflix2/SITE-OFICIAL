@@ -917,8 +917,8 @@ html, body {
 }
 
 .modal-wpp-content h2 { 
-    color: #e50914; 
-    margin-bottom: 15px; 
+    color: #075e54; 
+    margin-bottom: 25px; 
     font-size: 26px; 
     text-transform: uppercase; 
     letter-spacing: 1px; 
@@ -936,11 +936,11 @@ html, body {
 .btn-wpp { 
     display: inline-block;
     padding: 15px 35px;
-    font-size: 20px;
+    font-size: 15px;
     font-weight: bold;
     text-transform: uppercase;
     color: #fff;
-    background: linear-gradient(90deg, #e50914, #ff3b3b);
+    background: linear-gradient(90deg, #075e54, #075e54);
     border: none;
     border-radius: 8px;
     cursor: pointer;
@@ -950,14 +950,14 @@ html, body {
     z-index: 1;
     transition: 0.3s;
     /* O mesmo brilho (glow) dos botões do site */
-    box-shadow: 0 0 10px #e50914, 0 0 20px #ff3b3b;
+    box-shadow: 0 0 10px #075e54, 0 0 20px #075e54;
     /* A mesma animação de flutuar/pulsar */
     animation: float 2.5s ease-in-out infinite;
 }
 
 .btn-wpp:hover { 
     transform: scale(1.1);
-    box-shadow: 0 0 20px #ff0000, 0 0 40px #ff3b3b;
+    box-shadow: 0 0 20px #075e54, 0 0 40px #075e54;
 }
 
 /* Deixando o ícone do Zap branco para combinar com o estilo Premium */
@@ -982,4 +982,51 @@ html, body {
 .close-wpp:hover { 
     color: #fff; 
     transform: rotate(90deg);
+}
+
+/* Efeito de Brilho Ambilight para o Modal */
+.modal-content {
+  position: relative;
+  /* Cria uma sombra colorida suave que simula a luz saindo da tela */
+  box-shadow: 0 0 50px rgba(229, 9, 20, 0.4); 
+  transition: box-shadow 0.5s ease;
+}
+
+/* Escurecimento extra do fundo no modo cinema */
+.netflix-modal.active {
+  background: rgba(0, 0, 0, 0.95); /* Quase 100% preto */
+  backdrop-filter: blur(10px); /* Desfoca o fundo do site */
+}
+
+/* Ajuste no vídeo para o brilho não vazar de forma estranha */
+.modal-video {
+  display: block;
+  border-bottom: 2px solid #222;
+}
+/* Efeito Master de Desfoque no Fundo de Login */
+body.modal-open #login-screen {
+  filter: blur(10px) brightness(0.3);
+  transition: all 0.4s ease;
+  pointer-events: none;
+}
+
+/* Brilho especial para o QR Code no centro */
+.modal-wpp-content {
+  border: 1px solid rgba(37, 211, 102, 0.5);
+  box-shadow: 0 0 50px rgba(37, 211, 102, 0.2);
+}
+
+.modal-wpp-content h2 {
+  color:   color: ##075e54 !important; /* Título em verde WhatsApp */
+ !important; /* Título em verde WhatsApp */
+}
+/* Limpa as manchas da animação da Splash Screen da frente do Modal */
+#wppModal {
+  z-index: 99999; /* Garante que o QR Code fique acima de qualquer animação */
+}
+
+/* Remove qualquer efeito de aberração cromática (manchas coloridas) de dentro do modal */
+.modal-wpp-content * {
+  animation: none !important;
+  filter: none !important;
 }
