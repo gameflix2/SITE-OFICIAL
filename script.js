@@ -109,16 +109,17 @@ document.getElementById("netflixModal").addEventListener("click", e => {
 /* --- LÓGICA DE TROCA DO BANNER (TUDO VOLTA AO NORMAL) --- */
 document.querySelectorAll('.free-game-trigger').forEach(card => {
   card.addEventListener('click', function() {
-    // Captura os dados para trocar o banner (Isso garante que o trailer e logo voltem)
+    // 1. Captura os dados (Isso garante que o trailer e logo voltem)
     const novaLogo = this.getAttribute('data-logo');
     const novaDesc = this.getAttribute('data-desc');
     const novoVideo = this.getAttribute('data-video');
     const linkDrive = this.getAttribute('data-drive'); 
 
-    // Atualiza o banner normalmente
+    // 2. Atualiza o banner normalmente (Logo e Descrição)
     document.getElementById('banner-logo').src = novaLogo;
     document.getElementById('banner-desc').textContent = novaDesc;
     
+    // 3. Reinicia o Vídeo do Trailer
     const videoElement = document.getElementById('banner-video');
     if (videoElement) {
       videoElement.src = novoVideo;
@@ -126,20 +127,31 @@ document.querySelectorAll('.free-game-trigger').forEach(card => {
       videoElement.play().catch(()=>{});
     }
 
-    // AJUSTE DO BOTÃO: Abre o link se tiver, ou o seu POPUP se não tiver
+    // 4. CONFIGURAÇÃO DO BOTÃO (O segredo está aqui)
     const downloadAnchor = document.getElementById('banner-link');
+    const actionBtn = document.getElementById('btn-main-action'); // Captura o botão visual
     
     if (linkDrive) {
+      // Caso FarCry: Libera o link do Drive
       downloadAnchor.href = linkDrive;
       downloadAnchor.target = "_blank";
       downloadAnchor.onclick = null; 
     } else {
+      // Outros jogos: Bloqueia o link e mostra o seu alerta
       downloadAnchor.href = "javascript:void(0)";
-      downloadAnchor.onclick = function() {
+      downloadAnchor.target = "_self";
+      downloadAnchor.onclick = function(e) {
+        e.preventDefault(); // Garante que a página não recarregue
         alert("Este jogo libera em breve para download, enquanto isso vc pode baixar o FARCRY PRIMAL que ja esta disponivel para download");
       };
     }
 
+    // 5. Garante que o texto do botão mude para Download (como no seu original)
+    if (actionBtn) {
+      actionBtn.innerHTML = "▶ DOWNLOAD GRATIS";
+    }
+
+    // Sobe para o topo para mostrar a troca do banner
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 });
@@ -195,6 +207,7 @@ window.addEventListener('click', function(event) {
     if (event.target === modalWpp) closeWppModal();
     if (event.target === modalNetflix) closeModal();
 });
+
 
 
 
