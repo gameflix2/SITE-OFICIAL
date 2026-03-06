@@ -108,39 +108,39 @@ document.getElementById("netflixModal").addEventListener("click", e => {
 
 document.querySelectorAll('.free-game-trigger').forEach(card => {
   card.addEventListener('click', function() {
-    // 1. Coleta os dados (Adicionei a linha do Drive aqui)
+    const linkDrive = this.getAttribute('data-drive');
+    
+    // VERIFICAÇÃO: Se não tiver link do Drive, exibe o alerta e para a execução
+    if (!linkDrive) {
+      alert("Este jogo libera em breve para download! Enquanto isso, você pode baixar o FARCRY PRIMAL que já está disponível.");
+      return; // Interrompe o código aqui para não trocar o banner
+    }
+
+    // Se tiver o link (FarCry), ele executa a troca normal do banner
     const novaLogo = this.getAttribute('data-logo');
     const novaDesc = this.getAttribute('data-desc');
     const novoVideo = this.getAttribute('data-video');
-    const linkDrive = this.getAttribute('data-drive'); // Captura o link do Drive
 
-    // 2. Atualiza a LOGO e a DESCRIÇÃO no banner
-    const imgLogo = document.getElementById('banner-logo');
-    if (imgLogo) imgLogo.src = novaLogo;
+    document.getElementById('banner-logo').src = novaLogo;
+    document.getElementById('banner-desc').textContent = novaDesc;
     
-    const descElement = document.getElementById('banner-desc');
-    if (descElement) descElement.textContent = novaDesc;
-    
-    // 3. Atualiza o VÍDEO
     const videoElement = document.getElementById('banner-video');
     if (videoElement) {
       videoElement.src = novoVideo;
-      videoElement.load(); 
+      videoElement.load();
       videoElement.play().catch(()=>{});
     }
 
-    // 4. ATUALIZA O BOTÃO PARA O LINK DO DRIVE
     const downloadAnchor = document.getElementById('banner-link');
     const actionBtn = document.getElementById('btn-main-action');
     
     if (downloadAnchor) {
-      downloadAnchor.href = linkDrive; // Define o link do Google Drive
-      downloadAnchor.target = "_blank"; // Abre em nova aba para não fechar seu site
+      downloadAnchor.href = linkDrive;
+      downloadAnchor.target = "_blank";
     }
     
     if (actionBtn) {
-      actionBtn.innerHTML = "▶ DOWNLOAD GRATIS"; 
-      actionBtn.className = "btn-play"; 
+      actionBtn.innerHTML = "▶ DOWNLOAD GRATIS";
     }
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -198,6 +198,7 @@ window.addEventListener('click', function(event) {
     if (event.target === modalWpp) closeWppModal();
     if (event.target === modalNetflix) closeModal();
 });
+
 
 
 
