@@ -1038,7 +1038,7 @@ body.modal-open #login-screen {
 
 /* Criando o balão */
 .game-card:hover::after, .card-container:hover::after {
-  content: "Disponível em 4K • Plano Premium";
+  content: "OFERTA DE LANÇAMENTO • 70% OFF";
   position: absolute;
   bottom: 15px;
   left: 50%;
@@ -1056,5 +1056,6 @@ body.modal-open #login-screen {
   pointer-events: none; /* Garante que o balão não atrapalhe o clique */
   animation: fadeInTooltip 0.3s ease;
 }
+
 
 
