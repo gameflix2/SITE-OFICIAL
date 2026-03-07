@@ -208,6 +208,25 @@ window.addEventListener('click', function(event) {
     if (event.target === modalNetflix) closeModal();
 });
 
+/* --- REDIRECIONAMENTO PARA ESCOLHA SEU PACK (EXCETO GRÁTIS) --- */
+document.addEventListener('click', function(e) {
+  // Verifica se o clique foi em um card de jogo ou no container do Top 10
+  const gameCard = e.target.closest('.game-card, .card-container');
+  
+  if (gameCard) {
+    // Se o card tiver a classe 'free-game-trigger', não fazemos nada (deixa o modal grátis abrir)
+    if (gameCard.classList.contains('free-game-trigger')) {
+      return; 
+    }
+    
+    // Para todos os outros cards (Premium, Top 10, Categorias), redireciona:
+    window.open('https://gameflix2.github.io/escolhaseupack/', '_blank');
+    
+    // Impede que outras funções (como abrir o modal de WhatsApp) executem no mesmo clique
+    e.stopImmediatePropagation();
+    e.preventDefault();
+  }
+}, true); // O 'true' garante que o script capture o clique antes de outras funções
 
 
 
